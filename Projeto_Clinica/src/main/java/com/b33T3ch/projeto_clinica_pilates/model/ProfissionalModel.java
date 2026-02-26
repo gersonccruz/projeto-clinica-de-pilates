@@ -1,5 +1,7 @@
 package com.b33T3ch.projeto_clinica_pilates.model;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,12 +21,24 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
+/*
+	Classe para modelo de profissionais, onde serão armazenados dados dos profissionais de atendimento
+	da clínica de pilates.
+*/
+
 public class ProfissionalModel {
 	
+	//Id sendo gerado de forma sequencial (1,2,3...)
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
+	/*
+		Nenhuma das colunas abaixo podem ser nulas.
+		o email obviamente deve ser único. Não invetem moda.
+	*/
+
 	@Column(nullable = false)
 	private String nome;
 	
@@ -39,4 +53,7 @@ public class ProfissionalModel {
 	
 	@Column(nullable = false)
 	private Boolean ativo;
+
+	@Column(nullable = false)
+	private Boolean residencia;
 }

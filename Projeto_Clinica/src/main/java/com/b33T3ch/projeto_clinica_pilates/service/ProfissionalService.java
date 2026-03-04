@@ -1,5 +1,6 @@
 package com.b33T3ch.projeto_clinica_pilates.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,27 @@ public class ProfissionalService {
 		return toResponse(salvo);
 	}
 
+	public List<ProfissionalResponse> findAll() {
+		
+		//procura todos os profissionais no banco de dados, converte para resposta e retorna a lista de profissionais.
+		List<ProfissionalResponse> response = profissionalRepository.findAll()
+			.stream()
+			.map(this::toResponse)
+			.toList();
+		return response;
+	}
+
 	public ProfissionalResponse findById(Long id){
+		//procure pelo id do profissional
 		Optional<ProfissionalModel> profissionalOptional = profissionalRepository.findById(id);
 		if(profissionalOptional.isEmpty()){
+			//se não achar no banco, exception de entidade não encotrada.
 			throw new EntityNotFoundException("Profissional não encontrado");
 		}
 		return toResponse(profissionalOptional.get());
 	}
 	
-	
+	//resposta para o cliente.
 	private ProfissionalResponse toResponse(ProfissionalModel profissional) {
 		return new ProfissionalResponse(
 				profissional.getId(),

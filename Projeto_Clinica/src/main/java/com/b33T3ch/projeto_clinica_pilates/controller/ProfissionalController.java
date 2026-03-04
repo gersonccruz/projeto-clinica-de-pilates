@@ -1,5 +1,6 @@
 package com.b33T3ch.projeto_clinica_pilates.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.b33T3ch.projeto_clinica_pilates.dto.ProfissionalRequest;
@@ -48,6 +49,12 @@ public class ProfissionalController {
         }
     }
 
+    //endpoint para listar todos os profissionais.
+    @GetMapping("/profissionais/all")
+    public ResponseEntity<List<ProfissionalResponse>> getAllProfissionais() {
+        return ResponseEntity.ok(service.findAll());
+    }
+    //endopoint de registro dos profissionais.
     @PostMapping("/profissionais/register")
     public ResponseEntity<ProfissionalResponse> registerProfissional(@Valid @RequestBody ProfissionalRequest profissional){
         ProfissionalResponse response = service.create(profissional);

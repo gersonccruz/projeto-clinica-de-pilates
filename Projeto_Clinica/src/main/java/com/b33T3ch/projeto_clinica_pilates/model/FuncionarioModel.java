@@ -1,6 +1,6 @@
 package com.b33T3ch.projeto_clinica_pilates.model;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "TB_PROFISSIONAIS")
+@Table(name = "TB_FUNCIONARIOS")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,11 +23,11 @@ import lombok.Setter;
 @Builder
 
 /*
-	Classe para modelo de profissionais, onde serão armazenados dados dos profissionais de atendimento
+	Classe para modelo de FUNCIONARIOS, onde serão armazenados dados dos FUNCIONARIOS de atendimento
 	da clínica de pilates.
 */
 
-public class ProfissionalModel {
+public class FuncionarioModel {
 	
 	//Id sendo gerado de forma sequencial (1,2,3...)
 	@Id
@@ -41,19 +41,31 @@ public class ProfissionalModel {
 
 	@Column(nullable = false)
 	private String nome;
+
+	@Column
+	private LocalDate dataDeNascimento;
+
+	@Column(nullable = false, unique = true)
+	private String cpf;
 	
 	@Column(nullable = false, unique = true)
 	private String email;
+
+	@Column(nullable = false)
+	private String sexo;
 	
 	@Column(nullable = false)
 	private String telefone;
 	
 	@Column(nullable = false)
-	private String especialidade;
+	private String funcao;
 	
 	@Column(nullable = false)
 	private Boolean ativo;
 
-	@Column(nullable = false)
+	@Column
 	private Boolean residencia;
+
+	@Column
+	private String endereco;
 }
